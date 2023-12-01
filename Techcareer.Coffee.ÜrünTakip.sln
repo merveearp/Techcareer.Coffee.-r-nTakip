@@ -11,17 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unitTest", "unitTest", "{2E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CoffeeÜrünTakip", "CoffeeÜrünTakip", "{C4A36A66-9869-4A14-B0C7-B5D988651E63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "projects\CoffeeÜrünTakip\Model\Model.csproj", "{53C92632-F211-4E35-A83F-320367560FA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "projects\CoffeeÜrünTakip\Model\Model.csproj", "{53C92632-F211-4E35-A83F-320367560FA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "projects\CoffeeÜrünTakip\DataAccess\DataAccess.csproj", "{4349E1B8-A890-41DD-B4CD-03BCC31DA565}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "projects\CoffeeÜrünTakip\DataAccess\DataAccess.csproj", "{4349E1B8-A890-41DD-B4CD-03BCC31DA565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "projects\CoffeeÜrünTakip\Service\Service.csproj", "{95866714-2A19-4DA8-8E2D-F5681D0DB1E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "projects\CoffeeÜrünTakip\Service\Service.csproj", "{95866714-2A19-4DA8-8E2D-F5681D0DB1E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "projects\CoffeeÜrünTakip\WebAPI\WebAPI.csproj", "{26251901-4295-408C-8194-649F8C5AF9D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "projects\CoffeeÜrünTakip\WebAPI\WebAPI.csproj", "{26251901-4295-408C-8194-649F8C5AF9D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Persistance", "Core.Persistance\Core.Persistance.csproj", "{FD68B9D3-B6F3-4D1A-9211-A60A7F6BA4D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistance", "Core.Persistance\Core.Persistance.csproj", "{FD68B9D3-B6F3-4D1A-9211-A60A7F6BA4D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Shared", "corePackages\Core.Shared\Core.Shared.csproj", "{33F88E7E-5369-4596-9EC1-A6E6D5B35DB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Shared", "corePackages\Core.Shared\Core.Shared.csproj", "{33F88E7E-5369-4596-9EC1-A6E6D5B35DB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Concerns", "Core.Concerns\Core.Concerns.csproj", "{3A25BC4E-BB8D-4117-9970-B2D8BF34D731}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{33F88E7E-5369-4596-9EC1-A6E6D5B35DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F88E7E-5369-4596-9EC1-A6E6D5B35DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F88E7E-5369-4596-9EC1-A6E6D5B35DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A25BC4E-BB8D-4117-9970-B2D8BF34D731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A25BC4E-BB8D-4117-9970-B2D8BF34D731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A25BC4E-BB8D-4117-9970-B2D8BF34D731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A25BC4E-BB8D-4117-9970-B2D8BF34D731}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{26251901-4295-408C-8194-649F8C5AF9D2} = {C4A36A66-9869-4A14-B0C7-B5D988651E63}
 		{FD68B9D3-B6F3-4D1A-9211-A60A7F6BA4D1} = {A544EE17-F5AF-4B34-BA27-FC7839881A65}
 		{33F88E7E-5369-4596-9EC1-A6E6D5B35DB9} = {A544EE17-F5AF-4B34-BA27-FC7839881A65}
+		{3A25BC4E-BB8D-4117-9970-B2D8BF34D731} = {A544EE17-F5AF-4B34-BA27-FC7839881A65}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B43B85E5-12EE-428D-A95B-AB68E87B7B95}

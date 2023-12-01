@@ -1,6 +1,8 @@
 ﻿using Azure.Core;
 using Core.Shared;
+using DataAccess.Exceptions;
 using DataAccess.Repositories.Abstracts;
+using DataAccess.Rules;
 using Model.Dtos.RequestDto;
 using Model.Dtos.ResponseDto;
 using Model.Entities;
@@ -17,22 +19,20 @@ namespace Service.Concrete;
 public class ProductService : IProductService
 {
     private readonly IProductRepository _productRepository;
+    private readonly ProductRules _productRules;
 
-    public ProductService()
-    {
-    }
-
-    public ProductService(IProductRepository productRepository)
+    public ProductService(IProductRepository productRepository,ProductRules productRules)
     {
         _productRepository = productRepository;
+        _productRules = productRules;
  
     }
 
     public Response<ProductDto> Add(AddProduct request)
     {
-
+       
         Product product = AddProduct.ConvertToEntity(request);
-
+        
         product.Id = new Guid();
         _productRepository.Add(product);
 
@@ -43,24 +43,41 @@ public class ProductService : IProductService
             Message = "Ürün Eklendi.",
             StatusCode = System.Net.HttpStatusCode.Created
         };
+      
+        
     }
 
 
     public Response<ProductDto> Delete(Guid id)
     {
-        var product = _productRepository.GetById(id);
-        _productRepository.Delete(product);
-        var data = ProductDto.ConvertToResponse(product);
-        return new Response<ProductDto>()
+        try
         {
-            Data = data,
-            Message = "Ürün Silindi.",
-            StatusCode = System.Net.HttpStatusCode.OK
-        };
+            var product = _productRepository.GetById(id);
+            _productRules.ProductIsPresent(id);
+            _productRepository.Delete(product);
+            var data = ProductDto.ConvertToResponse(product);
+            return new Response<ProductDto>()
+            {
+                Data = data,
+                Message = "Ürün Silindi.",
+                StatusCode = System.Net.HttpStatusCode.OK
+            };
+
+        }
+        catch (NotFoundException ex)
+        {
+            return new Response<ProductDto>()
+            {
+                Message = ex.Message,
+                StatusCode = System.Net.HttpStatusCode.NotFound
+            };
+        }
+        
     }
 
     public Response<List<ProductDto>> GetAll()
     {
+        
         var products = _productRepository.GetAll();
         var response = products.Select(x => ProductDto.ConvertToResponse(x)).ToList();
         return new Response<List<ProductDto>>()
@@ -82,6 +99,7 @@ public class ProductService : IProductService
 
     public Response<List<DetailDto>> GetAllDetailsByCategoryId(int categoryId)
     {
+       
         var details = _productRepository.GetDetailsByCategoryId(categoryId);
         return new Response<List<DetailDto>>()
         {
@@ -92,17 +110,30 @@ public class ProductService : IProductService
 
     public Response<ProductDto> GetById(Guid id)
     {
-        var product = _productRepository.GetById(id);
-        var response = ProductDto.ConvertToResponse(product);
-        return new Response<ProductDto>()
+        try
         {
-            Data = response,
-            StatusCode = System.Net.HttpStatusCode.OK
-        };
+            _productRules.ProductIsPresent(id);
+            var product = _productRepository.GetById(id);
+            var response = ProductDto.ConvertToResponse(product);
+            return new Response<ProductDto>()
+            {
+                Data = response,
+                StatusCode = System.Net.HttpStatusCode.OK
+            };
+        }
+        catch(NotFoundException ex)
+        {
+            return new Response<ProductDto>()
+            {
+                Message = ex.Message,
+                StatusCode = System.Net.HttpStatusCode.NotFound
+            };
+        }
     }
 
     public Response<ProductDto> Update(UpdateProduct request)
     {
+        
         Product product = UpdateProduct.ConvertToEntity(request);
         
         _productRepository.Update(product);
@@ -112,5 +143,9 @@ public class ProductService : IProductService
             Data = response,
             StatusCode = System.Net.HttpStatusCode.OK
         };
+
+        
+        
+        
     }
 }

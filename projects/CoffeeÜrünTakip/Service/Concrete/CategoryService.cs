@@ -3,6 +3,7 @@ using Core.Shared;
 using DataAccess.Exceptions;
 using DataAccess.Repositories.Abstracts;
 using DataAccess.Repositories.Concrete;
+using DataAccess.Rules;
 using Model.Dtos.RequestDto;
 using Model.Dtos.ResponseDto;
 using Model.Entities;
@@ -18,25 +19,41 @@ namespace Service.Concrete;
 public class CategoryService : ICategoryService
 {
     private readonly ICategoryRepository _categoryRepository;
+    private readonly CategoryRules _categoryRules;
 
-    public CategoryService(ICategoryRepository categoryRepository)
+    public CategoryService(ICategoryRepository categoryRepository, CategoryRules categoryRules)
     {
         _categoryRepository = categoryRepository;
+        _categoryRules = categoryRules;
     }
 
 
     public Response<CategoryDto> Add(AddCategory request)
     {
-        Category category = AddCategory.ConvertToEntity(request);
 
-        _categoryRepository.Add(category);
-        var data = CategoryDto.ConvertToResponse(category);
-        return new Response<CategoryDto>
+        try
         {
-            Data = data,
-            Message = "Kategori Eklendi",
-            StatusCode = System.Net.HttpStatusCode.Created
-        };
+            Category category = AddCategory.ConvertToEntity(request);
+            _categoryRules.CategoryNameMustBeUnique(category.Name);
+
+            _categoryRepository.Add(category);
+            var data = CategoryDto.ConvertToResponse(category);
+            return new Response<CategoryDto>
+            {
+                Data = data,
+                Message = "Kategori Eklendi",
+                StatusCode = System.Net.HttpStatusCode.Created
+            };
+        }
+        catch (NotFoundException ex)
+        {
+            return new Response<CategoryDto>
+            {
+                Message = ex.Message,
+                StatusCode = System.Net.HttpStatusCode.BadRequest
+            };
+        }
+       
     }
 
     public Response<CategoryDto> Delete(int id)
@@ -44,6 +61,7 @@ public class CategoryService : ICategoryService
         try 
         {
             Category category = _categoryRepository.GetById(id);
+            _categoryRules.CategoryIsPresent(id);
 
             _categoryRepository.Delete(category);
             var data = CategoryDto.ConvertToResponse(category);
@@ -80,6 +98,7 @@ public class CategoryService : ICategoryService
     {
         try
         {
+            _categoryRules.CategoryIsPresent(id);
             var category = _categoryRepository.GetById(id);
             var response = CategoryDto.ConvertToResponse(category);
             return new Response<CategoryDto>
@@ -102,16 +121,27 @@ public class CategoryService : ICategoryService
 
     public Response<CategoryDto> Update(UpdateCategory request)
     {
-
-        Category category = UpdateCategory.ConvertToEntity(request);
-        _categoryRepository.Update(category);
-        var response = CategoryDto.ConvertToResponse(category);
-        return new Response<CategoryDto>()
+        try
         {
-            Data = response,
-            Message = "Kategori Güncellendi. ",
-            StatusCode = System.Net.HttpStatusCode.OK
+            Category category = UpdateCategory.ConvertToEntity(request);
+            _categoryRules.CategoryNameMustBeUnique(category.Name);
+            _categoryRepository.Update(category);
+            var response = CategoryDto.ConvertToResponse(category);
+            return new Response<CategoryDto>()
+            {
+                Data = response,
+                Message = "Kategori Güncellendi. ",
+                StatusCode = System.Net.HttpStatusCode.OK
 
-        };
+            };
+        }
+        catch (NotFoundException ex)
+        {
+            return new Response<CategoryDto>()
+            {
+                Message = ex.Message,
+                StatusCode = System.Net.HttpStatusCode.BadRequest
+            };
+        }     
     }
 }

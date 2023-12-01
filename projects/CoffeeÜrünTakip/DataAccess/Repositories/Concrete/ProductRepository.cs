@@ -39,6 +39,7 @@ namespace DataAccess.Repositories.Concrete
 
         }
 
+       
         public List<DetailDto> GetDetailsByCategoryId(int categoryId)
         {
             var details = Context.Products.Where(x => x.CategoryId == categoryId).Join(

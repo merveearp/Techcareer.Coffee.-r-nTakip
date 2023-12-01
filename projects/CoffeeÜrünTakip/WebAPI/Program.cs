@@ -1,6 +1,7 @@
 using DataAccess.Context;
 using DataAccess.Repositories.Abstracts;
 using DataAccess.Repositories.Concrete;
+using DataAccess.Rules;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Service.Abstract;
@@ -23,6 +24,8 @@ builder.Services.AddScoped<IProductRepository , ProductRepository>();
 builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<IProductService,ProductService>();
 
+builder.Services.AddScoped<ProductRules>();
+builder.Services.AddScoped<CategoryRules>();
 
 
 var app = builder.Build();
