@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using Core.Shared;
+using DataAccess.Exceptions;
 using DataAccess.Repositories.Abstracts;
 using DataAccess.Repositories.Concrete;
 using Model.Dtos.RequestDto;
@@ -40,17 +41,28 @@ public class CategoryService : ICategoryService
 
     public Response<CategoryDto> Delete(int id)
     {
-        Category category = _categoryRepository.GetById(id);
-
-        _categoryRepository.Delete(category);
-        var data = CategoryDto.ConvertToResponse(category);
-        return new Response<CategoryDto>
+        try 
         {
-            Data = data,
-            Message = "Kategori Silindi .",
-            StatusCode = System.Net.HttpStatusCode.OK
-        };
+            Category category = _categoryRepository.GetById(id);
 
+            _categoryRepository.Delete(category);
+            var data = CategoryDto.ConvertToResponse(category);
+            return new Response<CategoryDto>
+            {
+                Data = data,
+                Message = "Kategori Silindi .",
+                StatusCode = System.Net.HttpStatusCode.OK
+            };
+        }
+        catch(NotFoundException ex)
+        {
+             return new Response<CategoryDto>()
+             {
+                 Message = ex.Message,
+                 StatusCode = System.Net.HttpStatusCode.NotFound
+             };
+        } 
+     
     }
 
     public Response<List<CategoryDto>> GetAll()
@@ -66,14 +78,26 @@ public class CategoryService : ICategoryService
 
     public Response<CategoryDto> GetById(int id)
     {
-
-        var category = _categoryRepository.GetById(id);
-        var response = CategoryDto.ConvertToResponse(category);
-        return new Response<CategoryDto>
+        try
         {
-            Data = response,
-            StatusCode = System.Net.HttpStatusCode.OK
-        };
+            var category = _categoryRepository.GetById(id);
+            var response = CategoryDto.ConvertToResponse(category);
+            return new Response<CategoryDto>
+            {
+                Data = response,
+                StatusCode = System.Net.HttpStatusCode.OK
+            };
+        }
+        catch (NotFoundException ex)
+        {
+            return new Response<CategoryDto>()
+            {
+                Message = ex.Message,
+                StatusCode = System.Net.HttpStatusCode.NotFound
+            };
+       
+        }
+     
     }
 
     public Response<CategoryDto> Update(UpdateCategory request)
