@@ -30,11 +30,11 @@ public class ProductService : IProductService
 
     public Response<ProductDto> Add(AddProduct request)
     {
-       
+      
         Product product = AddProduct.ConvertToEntity(request);
-        
         product.Id = new Guid();
         _productRepository.Add(product);
+        
 
         var data = ProductDto.ConvertToResponse(product);
         return new Response<ProductDto>()
@@ -42,9 +42,7 @@ public class ProductService : IProductService
             Data = data,
             Message = "Ürün Eklendi.",
             StatusCode = System.Net.HttpStatusCode.Created
-        };
-      
-        
+        }; 
     }
 
 
@@ -87,12 +85,13 @@ public class ProductService : IProductService
         };
     }
 
-    public Response<List<DetailDto>> GetAllDetails()
+    public Response<List<ProductDto>> GetAllDetails()
     {
-        var details = _productRepository.GetAllProductDetails();
-        return new Response<List<DetailDto>>()
+        var products = _productRepository.GetAll();
+        var response = products.Select(x => ProductDto.ConvertToResponse(x)).ToList();
+        return new Response<List<ProductDto>>()
         {
-            Data = details,
+            Data = response,
             StatusCode = System.Net.HttpStatusCode.OK
         };
     }
@@ -142,10 +141,8 @@ public class ProductService : IProductService
         {
             Data = response,
             StatusCode = System.Net.HttpStatusCode.OK
-        };
-
-        
-        
+        };  
         
     }
+    
 }

@@ -28,5 +28,6 @@ public class ProductRules
             throw new NotFoundException($"Id si : {id} olan ürün bulunamadı");
         }
     }
+  
 
 }

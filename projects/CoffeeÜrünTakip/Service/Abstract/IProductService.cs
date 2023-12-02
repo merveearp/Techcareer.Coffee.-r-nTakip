@@ -18,6 +18,6 @@ public interface IProductService
 
     Response<List<ProductDto>> GetAll();
   
-    Response<List<DetailDto>> GetAllDetails();
+    Response<List<ProductDto>> GetAllDetails();
     Response<List<DetailDto>> GetAllDetailsByCategoryId(int categoryId);
 }

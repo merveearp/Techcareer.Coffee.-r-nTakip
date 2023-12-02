@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories.Concrete
 {
-    public class ProductRepository : EfRepositoryBase<BaseDbContext, Product, Guid>, IProductRepository
+    public class ProductRepository : EfRepositoryBase<BaseDbContext, Product,Guid>, IProductRepository
 
     {
         public ProductRepository(BaseDbContext context) : base(context)
