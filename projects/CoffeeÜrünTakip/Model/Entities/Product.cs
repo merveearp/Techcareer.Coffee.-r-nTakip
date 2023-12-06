@@ -13,8 +13,11 @@ public class Product : Entity<Guid>
     public string Ingredient { get; set; }
     public decimal Price { get; set; }
     public int CategoryId { get; set; }
+    public int CoffeeId { get; set; }
     
     public Category Category { get; set; }
+
+    public Coffee Coffee { get; set; }
          
 
 

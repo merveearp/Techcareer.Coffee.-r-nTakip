@@ -2,25 +2,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Model.Dtos.RequestDto;
 using Service.Abstract;
+using Service.Concrete;
 
 namespace WebAPI.Controllers;
 
- [Route("api/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
-public class CategoriesController : ControllerBase
+public class CoffeesController : ControllerBase
 {
-    private readonly ICategoryService _categoryService;
+    private readonly ICoffeeService _coffeeService;
 
-    public CategoriesController(ICategoryService categoryService)
+    public CoffeesController(ICoffeeService coffeeService)
     {
-        _categoryService = categoryService;
+        _coffeeService = coffeeService;
     }
 
-
     [HttpPost("add")]
-    public IActionResult Add([FromBody] AddCategory categoryAddRequest)
+    public IActionResult Add([FromBody] AddCoffee coffeeAddRequest)
     {
-        var result = _categoryService.Add(categoryAddRequest);
+        var result = _coffeeService.Add(coffeeAddRequest);
 
         if (result.StatusCode == System.Net.HttpStatusCode.Created)
         {
@@ -28,11 +28,10 @@ public class CategoriesController : ControllerBase
         }
         return BadRequest(result);
     }
-
     [HttpPut]
-    public IActionResult Update([FromBody] UpdateCategory categoryUpdateRequest)
+    public IActionResult Update([FromBody] UpdateCoffee coffeeUpdateRequest)
     {
-        var result = _categoryService.Update(categoryUpdateRequest);
+        var result = _coffeeService.Update(coffeeUpdateRequest);
         if (result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             return Ok(result);
@@ -43,7 +42,7 @@ public class CategoriesController : ControllerBase
     [HttpDelete]
     public IActionResult Delete([FromQuery] int id)
     {
-        var result = _categoryService.Delete(id);
+        var result = _coffeeService.Delete(id);
         if (result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             return Ok(result);
@@ -54,17 +53,7 @@ public class CategoriesController : ControllerBase
     [HttpGet("getbyid")]
     public IActionResult GetById([FromQuery] int id)
     {
-        var result = _categoryService.GetById(id);
-        if (result.StatusCode == System.Net.HttpStatusCode.OK)
-        {
-            return Ok(result);
-        }
-        return BadRequest(result);
-    }
-    [HttpGet("getall")]
-    public IActionResult GetAll()
-    {
-        var result = _categoryService.GetAll();
+        var result = _coffeeService.GetById(id);
         if (result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             return Ok(result);
@@ -72,4 +61,16 @@ public class CategoriesController : ControllerBase
         return BadRequest(result);
     }
 
+
+
+    [HttpGet("getall")]
+    public IActionResult GetAll()
+    {
+        var result = _coffeeService.GetAll();
+        if (result.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            return Ok(result);
+        }
+        return BadRequest(result);
+    }
 }

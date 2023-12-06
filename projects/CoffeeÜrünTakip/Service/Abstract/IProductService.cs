@@ -16,8 +16,11 @@ public interface IProductService
     Response<ProductDto> Delete(Guid id);
     Response<ProductDto> GetById(Guid id);
 
+
     Response<List<ProductDto>> GetAll();
-  
     Response<List<ProductDto>> GetAllDetails();
-    Response<List<DetailDto>> GetAllDetailsByCategoryId(int categoryId);
+
+    
+    Response<List<ProductDetailDto>> GetAllDetailsByCategoryId(int categoryId);
+    Response<List<ProductDetailDto>>GetAllDetailsByCoffeeId(int coffeeId);
 }

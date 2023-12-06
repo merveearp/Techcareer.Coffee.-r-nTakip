@@ -21,8 +21,11 @@ opt=>opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")
 
 builder.Services.AddScoped<ICategoryRepository , CategoryRepository>();
 builder.Services.AddScoped<IProductRepository , ProductRepository>();
+builder.Services.AddScoped<ICoffeeRepository , CoffeeRepository>();
+
 builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<IProductService,ProductService>();
+builder.Services.AddScoped<ICoffeeService,CoffeeService>();
 
 builder.Services.AddScoped<ProductRules>();
 builder.Services.AddScoped<CategoryRules>();

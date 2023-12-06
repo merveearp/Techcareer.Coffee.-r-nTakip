@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace DataAccess.Repositories.Abstracts;
 public interface IProductRepository : IEntityRepository<Product,Guid>
 {
-    List<DetailDto> GetAllProductDetails();
+    List<ProductDetailDto> GetAllProductDetails();
    
-    List<DetailDto>GetDetailsByCategoryId(int  categoryId);
-    
-    DetailDto GetProductDetail(Guid id);
+    List<ProductDetailDto>GetDetailsByCategoryId(int  categoryId);
+    List<ProductDetailDto> GetDetailsByCoffeeId(int coffeeId);
+    ProductDetailDto GetProductDetail(Guid id);
    
     
 }

@@ -15,7 +15,7 @@ namespace Model.Dtos.RequestDto
             {
 
                 Name = request.Name,
-                Id = request.Id
+                Id = request.Id,
 
             };
         }

@@ -18,17 +18,18 @@ namespace DataAccess.Repositories.Concrete
         {
         }
 
-        public List<DetailDto> GetAllProductDetails()
+        public List<ProductDetailDto> GetAllProductDetails()
         {
             var details = Context.Products.Join(
              Context.Categories,
              p => p.CategoryId,
              c => c.Id,
-             (product, category) => new DetailDto
+             
+             (product, category) => new ProductDetailDto
 
              {
                  Name = product.Name,
-                 CategoryName = category.Name,
+                 CategoryName = category.Name,    
                  Id = product.Id,
                  Price = product.Price,
                  Ingredient = product.Ingredient,
@@ -40,13 +41,13 @@ namespace DataAccess.Repositories.Concrete
         }
 
        
-        public List<DetailDto> GetDetailsByCategoryId(int categoryId)
+        public List<ProductDetailDto> GetDetailsByCategoryId(int categoryId)
         {
             var details = Context.Products.Where(x => x.CategoryId == categoryId).Join(
                Context.Categories,
                p => p.CategoryId,
                c => c.Id,
-               (p, c) => new DetailDto
+               (p, c) => new ProductDetailDto
                {
                    CategoryName = c.Name,
                    Id = p.Id,
@@ -58,13 +59,31 @@ namespace DataAccess.Repositories.Concrete
             return details;
         }
 
-        public DetailDto GetProductDetail(Guid id)
+        public List<ProductDetailDto> GetDetailsByCoffeeId(int coffeeId)
+        {
+            var details = Context.Products.Where(x => x.CoffeeId == coffeeId).Join(
+            Context.Coffees,
+            p => p.CoffeeId,
+            f => f.Id,
+            (p, f) => new ProductDetailDto
+            {
+                CoffeeName = f.Name,
+                Id = p.Id,
+                Price = p.Price,
+                Name = p.Name,
+                
+            }
+            ).ToList();
+            return details;
+        }
+
+        public ProductDetailDto GetProductDetail(Guid id)
         {
             var details = Context.Products.Join(
               Context.Categories,
               p => p.CategoryId,
               c => c.Id,
-              (p, c) => new DetailDto
+              (p, c) => new ProductDetailDto
 
               {
                   CategoryName = c.Name,

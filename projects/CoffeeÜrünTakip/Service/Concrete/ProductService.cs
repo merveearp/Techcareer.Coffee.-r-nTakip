@@ -96,17 +96,27 @@ public class ProductService : IProductService
         };
     }
 
-    public Response<List<DetailDto>> GetAllDetailsByCategoryId(int categoryId)
+    public Response<List<ProductDetailDto>> GetAllDetailsByCategoryId(int categoryId)
     {
        
         var details = _productRepository.GetDetailsByCategoryId(categoryId);
-        return new Response<List<DetailDto>>()
+        return new Response<List<ProductDetailDto>>()
         {
             Data = details,
             StatusCode = System.Net.HttpStatusCode.OK
         };
     }
 
+    public Response<List<ProductDetailDto>> GetAllDetailsByCoffeeId(int coffeeId)
+    {
+
+        var details = _productRepository.GetDetailsByCoffeeId(coffeeId);
+        return new Response<List<ProductDetailDto>>()
+        {
+            Data = details,
+            StatusCode = System.Net.HttpStatusCode.OK
+        };
+    }
     public Response<ProductDto> GetById(Guid id)
     {
         try

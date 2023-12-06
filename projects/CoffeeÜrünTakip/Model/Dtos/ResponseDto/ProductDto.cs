@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model.Dtos.ResponseDto;
 
-public record ProductDto( Guid Id,string Name, string Ingredient, decimal Price, int CategoryId)
+public record ProductDto( Guid Id,string Name, string Ingredient, decimal Price, int CategoryId,int CoffeeId)
 {
 
     public static ProductDto ConvertToResponse(Product product)
@@ -18,7 +18,8 @@ public record ProductDto( Guid Id,string Name, string Ingredient, decimal Price,
             Name : product.Name,
             Ingredient :product.Ingredient,
             Price :product.Price,
-            CategoryId :product.CategoryId
+            CategoryId :product.CategoryId,
+            CoffeeId : product.CoffeeId
 
             );
     }

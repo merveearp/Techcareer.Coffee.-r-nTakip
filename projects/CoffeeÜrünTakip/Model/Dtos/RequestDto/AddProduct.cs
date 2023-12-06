@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model.Dtos.RequestDto;
 
-public record AddProduct(string Name , string Ingredient ,decimal Price , int CategoryId)
+public record AddProduct(string Name , string Ingredient ,decimal Price , int CategoryId,int CoffeeId)
 {
 
     public static Product ConvertToEntity (AddProduct request)
@@ -18,7 +18,8 @@ public record AddProduct(string Name , string Ingredient ,decimal Price , int Ca
             Name = request.Name,
             Ingredient = request.Ingredient,
             Price = request.Price,
-            CategoryId = request.CategoryId
+            CategoryId = request.CategoryId,
+            CoffeeId = request.CoffeeId,
 
         };
     }

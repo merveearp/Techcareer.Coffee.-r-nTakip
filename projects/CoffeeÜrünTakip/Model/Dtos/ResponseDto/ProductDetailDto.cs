@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Model.Dtos.ResponseDto;
 
-public class DetailDto
+public class ProductDetailDto
 {
     public Guid Id { get; init; }
     public string Name { get; init; }
     public string Ingredient { get; init; }
     public decimal Price { get; init; }
     public int CategoryId {  get; init; }
+    public int CoffeId { get; init; }
     public string CategoryName { get; init; }
+    public string CoffeeName { get; init; }
 }
