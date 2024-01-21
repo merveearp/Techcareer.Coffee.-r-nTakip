@@ -5,18 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.Dtos.RequestDto;
-
-public record AddCoffee(string Name, string Location )
+namespace Model.Dtos.RequestDto
 {
-    public static Coffee ConvertToEntity(AddCoffee request)
-    {
-        return new Coffee
-        {
 
-            Name = request.Name,
-            Location = request.Location,
-           
-        };
+    public record AddCoffee(string Name, string Location)
+    {
+        public static Coffee ConvertToEntity(AddCoffee request)
+        {
+            return new Coffee
+            {
+
+                Name = request.Name,
+                Location = request.Location,
+
+            };
+        }
     }
 }

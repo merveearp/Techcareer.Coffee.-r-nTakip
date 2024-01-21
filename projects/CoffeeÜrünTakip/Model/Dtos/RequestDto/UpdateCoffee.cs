@@ -9,7 +9,6 @@ namespace Model.Dtos.RequestDto
 {
     public record UpdateCoffee(int Id, string Name,string Location)
     {
-
         public static Coffee ConvertToEntity(UpdateCoffee request)
         {
             return new Coffee
@@ -17,9 +16,10 @@ namespace Model.Dtos.RequestDto
                 Id = request.Id,
                 Name = request.Name,
                 Location = request.Location,
-               
-                
+
+
             };
         }
+
     }
 }

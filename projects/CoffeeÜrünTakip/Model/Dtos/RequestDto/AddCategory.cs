@@ -5,17 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.Dtos.RequestDto;
-
-public record AddCategory (string Name)
+namespace Model.Dtos.RequestDto
 {
-    public static Category ConvertToEntity(AddCategory request)
+
+    public record AddCategory(string Name)
     {
-        return new Category
+        public static Category ConvertToEntity(AddCategory request)
         {
-           
-            Name = request.Name,
-           
-        };
+            return new Category
+            {
+
+                Name = request.Name,
+
+            };
+        }
     }
 }
