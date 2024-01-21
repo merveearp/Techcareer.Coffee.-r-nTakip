@@ -10,12 +10,12 @@ namespace Model.Dtos.RequestDto
 
     public record AddCategory(string Name)
     {
-        public static Category ConvertToEntity(AddCategory request)
+        public static Category ConvertToEntity(AddCategory addCategoryrequest)
         {
             return new Category
             {
 
-                Name = request.Name,
+                Name = addCategoryrequest.Name,
 
             };
         }

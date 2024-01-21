@@ -26,9 +26,9 @@ public class CoffeeService : ICoffeeService
         _coffeeRepository = coffeeRepository;
     }
 
-    public Response<CoffeeDto> Add(AddCoffee request)
+    public Response<CoffeeDto> Add(AddCoffee addCoffeerequest)
     {
-        Coffee coffee = AddCoffee.ConvertToEntity(request);
+        Coffee coffee = AddCoffee.ConvertToEntity(addCoffeerequest);
         
         _coffeeRepository.Add(coffee);
 
@@ -78,9 +78,9 @@ public class CoffeeService : ICoffeeService
         };
     }
 
-    public Response<CoffeeDto> Update(UpdateCoffee request)
+    public Response<CoffeeDto> Update(UpdateCoffee updateCoffeerequest)
     {
-        Coffee coffee = UpdateCoffee.ConvertToEntity(request);
+        Coffee coffee = UpdateCoffee.ConvertToEntity(updateCoffeerequest);
 
         _coffeeRepository.Update(coffee);
         var response = CoffeeDto.ConvertToResponse(coffee);

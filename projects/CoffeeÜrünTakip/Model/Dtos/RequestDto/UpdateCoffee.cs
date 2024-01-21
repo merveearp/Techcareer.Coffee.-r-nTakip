@@ -9,13 +9,13 @@ namespace Model.Dtos.RequestDto
 {
     public record UpdateCoffee(int Id, string Name,string Location)
     {
-        public static Coffee ConvertToEntity(UpdateCoffee request)
+        public static Coffee ConvertToEntity(UpdateCoffee updateCoffeerequest)
         {
             return new Coffee
             {
-                Id = request.Id,
-                Name = request.Name,
-                Location = request.Location,
+                Id = updateCoffeerequest.Id,
+                Name = updateCoffeerequest.Name,
+                Location = updateCoffeerequest.Location,
 
 
             };

@@ -9,13 +9,13 @@ namespace Model.Dtos.RequestDto
 {
     public record UpdateCategory(int Id, string Name)
     {
-        public static Category ConvertToEntity(UpdateCategory request)
+        public static Category ConvertToEntity(UpdateCategory updateCategoryrequest)
         {
             return new Category
             {
 
-                Name = request.Name,
-                Id = request.Id,
+                Name = updateCategoryrequest.Name,
+                Id = updateCategoryrequest.Id,
 
             };
         }

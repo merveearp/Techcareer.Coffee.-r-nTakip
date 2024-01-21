@@ -11,8 +11,8 @@ namespace Service.Abstract;
 
 public interface ICategoryService
 {
-    Response<CategoryDto> Add(AddCategory categoryAddRequest);
-    Response<CategoryDto> Update(UpdateCategory categoryUpdateRequest);
+    Response<CategoryDto> Add(AddCategory addCategoryRequest);
+    Response<CategoryDto> Update(UpdateCategory updateCategoryRequest);
     Response<CategoryDto> Delete(int id);
     Response<CategoryDto> GetById(int id);
 

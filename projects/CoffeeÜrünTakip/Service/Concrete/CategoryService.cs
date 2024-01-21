@@ -28,12 +28,12 @@ public class CategoryService : ICategoryService
     }
 
 
-    public Response<CategoryDto> Add(AddCategory request)
+    public Response<CategoryDto> Add(AddCategory addCategoryrequest)
     {
 
         try
         {
-            Category category = AddCategory.ConvertToEntity(request);
+            Category category = AddCategory.ConvertToEntity(addCategoryrequest);
             _categoryRules.CategoryNameMustBeUnique(category.Name);
 
             _categoryRepository.Add(category);
@@ -119,11 +119,11 @@ public class CategoryService : ICategoryService
      
     }
 
-    public Response<CategoryDto> Update(UpdateCategory request)
+    public Response<CategoryDto> Update(UpdateCategory updateCategoryrequest)
     {
         try
         {
-            Category category = UpdateCategory.ConvertToEntity(request);
+            Category category = UpdateCategory.ConvertToEntity(updateCategoryrequest);
             _categoryRules.CategoryNameMustBeUnique(category.Name);
             _categoryRepository.Update(category);
             var response = CategoryDto.ConvertToResponse(category);

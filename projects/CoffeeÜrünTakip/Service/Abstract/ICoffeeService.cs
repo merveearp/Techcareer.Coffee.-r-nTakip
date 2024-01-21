@@ -11,8 +11,8 @@ namespace Service.Abstract
 {
     public interface ICoffeeService
     {
-        Response<CoffeeDto> Add(AddCoffee request);
-        Response<CoffeeDto> Update(UpdateCoffee request);
+        Response<CoffeeDto> Add(AddCoffee addCoffeerequest);
+        Response<CoffeeDto> Update(UpdateCoffee updateCoffeerequest);
         Response<CoffeeDto> Delete(int id);
         Response<CoffeeDto> GetById(int id);
 

@@ -18,9 +18,9 @@ public class CategoriesController : ControllerBase
 
 
     [HttpPost("add")]
-    public IActionResult Add([FromBody] AddCategory categoryAddRequest)
+    public IActionResult Add([FromBody] AddCategory addCategoryrequest)
     {
-        var result = _categoryService.Add(categoryAddRequest);
+        var result = _categoryService.Add(addCategoryrequest);
 
         if (result.StatusCode == System.Net.HttpStatusCode.Created)
         {
@@ -30,9 +30,9 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPut]
-    public IActionResult Update([FromBody] UpdateCategory categoryUpdateRequest)
+    public IActionResult Update([FromBody] UpdateCategory updateCategoryrequest)
     {
-        var result = _categoryService.Update(categoryUpdateRequest);
+        var result = _categoryService.Update(updateCategoryrequest);
         if (result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             return Ok(result);

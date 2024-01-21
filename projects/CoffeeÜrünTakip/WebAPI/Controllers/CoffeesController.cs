@@ -18,9 +18,9 @@ public class CoffeesController : ControllerBase
     }
 
     [HttpPost("add")]
-    public IActionResult Add([FromBody] AddCoffee coffeeAddRequest)
+    public IActionResult Add([FromBody] AddCoffee addCoffeerequest)
     {
-        var result = _coffeeService.Add(coffeeAddRequest);
+        var result = _coffeeService.Add(addCoffeerequest);
 
         if (result.StatusCode == System.Net.HttpStatusCode.Created)
         {
@@ -29,9 +29,9 @@ public class CoffeesController : ControllerBase
         return BadRequest(result);
     }
     [HttpPut]
-    public IActionResult Update([FromBody] UpdateCoffee coffeeUpdateRequest)
+    public IActionResult Update([FromBody] UpdateCoffee updateCoffeerequest)
     {
-        var result = _coffeeService.Update(coffeeUpdateRequest);
+        var result = _coffeeService.Update(updateCoffeerequest);
         if (result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             return Ok(result);
